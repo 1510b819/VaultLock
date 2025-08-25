@@ -1,19 +1,9 @@
 # VaultLock
 
-VaultLock is a lightweight and secure password manager built with a modern stack:
-
-- React + Vite frontend
-
-- Express/Node.js backend
-
-- MongoDB for secure storage
-
-- Fully containerized with Docker for easy deployment
-
-
+A self-hosted, zero-knowledge password manager built with the MERN stack.
 
 ## About
-VaultLock provides a simple but effective way to manage passwords. It’s designed with a focus on security, usability, and portability. By running inside Docker containers, it works the same across all environments with minimal setup.
+VaultLock is a secure password manager designed for self-hosting. It uses end-to-end encryption, where all sensitive data is encrypted and decrypted only on the client side. The server only stores ciphertext, ensuring that even if the database is compromised, no plaintext credentials are exposed.
 
 <img width="1862" height="957" alt="image" src="https://github.com/user-attachments/assets/a874b447-b9fb-4c61-a340-c8852c4746ca" />
 
@@ -22,32 +12,31 @@ VaultLock provides a simple but effective way to manage passwords. It’s design
 
 
 ### Features
+- Zero-knowledge encryption: All vault data is encrypted in the browser using AES-256-GCM.
 
-- User authentication (signup/login with hashed passwords)
+- Strong key derivation with PBKDF2 (310,000 iterations, SHA-256).
 
-- Encrypted vault storage for passwords and credentials
+- JWT-based authentication and session management.
 
-- Secure API endpoints protected with authentication
+- Secure storage in MongoDB using Mongoose models.
 
-- React frontend for a clean and responsive UI
+- Vault entries include service, username, and encrypted password.
 
-- Health check endpoint for monitoring backend availability
+- Built-in password generator with customizable options.
 
-- Configurable through environment variables
+- Modern React frontend with responsive UI.
 
-- Fully containerized with Docker Compose (backend, frontend, and MongoDB services)
+- Session key persistence in the browser for 5 minutes to balance security and usability.
 
-### Security Measures
+- Self-hosted: runs on your own server, giving you full control over your data.
 
-- Passwords are hashed using industry-standard algorithms before storage
+### Tech Stack
 
-- Helmet is used in the backend for HTTP header protection
+- Frontend: React, WebCrypto API, React Hot Toast.
 
-- CORS configured to prevent unauthorized cross-origin requests
+- Backend: Node.js, Express, JWT, Mongoose, MongoDB.
 
-- Environment variables are used for sensitive configurations (database URI, ports, etc.)
-
-- MongoDB runs in a separate container with a mounted volume for persistent and secure storage
+- Security: Helmet, CORS, AES-256-GCM, PBKDF2.
 
 ### Project Structure
 
@@ -70,3 +59,6 @@ password-manager-frontend → Source code for frontend UI
 3. Run docker-compose up --build
 
 4. Access the app in your browser at http://localhost:3000
+
+### Use Case
+VaultLock is intended for personal or small-team use. Since it is self-hosted, it avoids reliance on third-party services and ensures you retain full ownership of your sensitive data.
