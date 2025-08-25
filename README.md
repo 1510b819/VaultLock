@@ -63,10 +63,10 @@ password-manager-frontend → Source code for frontend UI
 
 ### How to Run
 
-Install Docker and Docker Compose
+1. Install Docker and Docker Compose
 
-Clone the repository
+2. Clone the repository
 
-Run docker-compose up --build
+3. Run docker-compose up --build
 
-Access the app in your browser at http://localhost:3000
+4. Access the app in your browser at http://localhost:3000
