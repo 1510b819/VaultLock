@@ -1,0 +1,37 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: vaultlock-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.server   # <-- use backend Dockerfile
+    container_name: vaultlock-backend
+    restart: always
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/vaultlock
+    ports:
+      - "5000:4000"   # host:container (your backend listens on 4000)
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.client   # <-- use frontend Dockerfile
+    container_name: vaultlock-frontend
+    restart: always
+    ports:
+      - "3000:80"    # serve frontend on host:3000
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
+  
